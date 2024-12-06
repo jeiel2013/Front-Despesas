@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Gerenciamento de Despesas</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Gerenciamento de Despesas</h1>
+      </header>
+      <main>
+        <section class="table-section">
+          <h2>Categorias de Despesa</h2>
+          <button class="btn btn-add" onclick="Modal('category')">
+            Cadastrar Categoria
+          </button>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyCat"></tbody>
+          </table>
+        </section>
+        <section class="table-section">
+          <h2>Despesas</h2>
+          <button class="btn btn-add" onclick="Modal('expense')">
+            Cadastrar Despesa
+          </button>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+                <th>Data</th>
+                <th>Categoria</th>
+                <th>Status</th>
+                <th>Forma de Pagamento</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyDesp"></tbody>
+          </table>
+        </section>
+      </main>
+
+      <!-- Modal categoria -->
+      <div id="categoryModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="closeCategoryModal">&times;</span>
+          <h2>Cadastrar Categoria</h2>
+          <form id="formCat">
+            <label for="categoryName">Nome:</label>
+            <input type="text" id="categoryName" required />
+
+            <label for="categoryDescription">Descrição:</label>
+            <textarea id="categoryDescription" required></textarea>
+
+            <button type="button" class="btn btn-submit" onclick="addCat()">
+              Salvar
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div id="editCategoryModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="closeEditCategoryModal">&times;</span>
+          <h2>Editar Categoria</h2>
+          <form id="formEditCat">
+            <input type="hidden" id="catExpenseId" />
+            <label for="editCategoryName">Nome:</label>
+            <input type="text" id="editCategoryName" required />
+
+            <label for="editCategoryDescription">Descrição:</label>
+            <textarea id="editCategoryDescription" required></textarea>
+
+            <button type="button" class="btn btn-submit" onclick="editarCat()">
+              Salvar
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Editar -->
+      <div id="editExpenseModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="closeEditExpenseModal">&times;</span>
+          <h2>Editar Despesa</h2>
+          <form id="formEditDespesa">
+            <input type="hidden" id="editExpenseId" />
+
+            <label for="editExpenseDescription">Descrição:</label>
+            <input
+              type="text"
+              id="editExpenseDescription"
+              name="editExpenseDescription"
+              required
+            />
+
+            <label for="editExpenseValue">Valor:</label>
+            <input
+              type="text"
+              id="editExpenseValue"
+              name="editExpenseValue"
+              required
+            />
+
+            <label for="editExpenseDate">Data:</label>
+            <input
+              type="date"
+              id="editExpenseDate"
+              name="editExpenseDate"
+              readonly
+            />
+
+            <label for="editExpenseCategory">Categoria:</label>
+            <select
+              name="editExpenseCategory"
+              id="editExpenseCategory"
+              required
+            ></select>
+
+            <label for="editExpenseStatus">Status:</label>
+            <input
+              type="text"
+              id="editExpenseStatus"
+              name="editExpenseStatus"
+              required
+            />
+
+            <label for="editExpensePay">Forma de Pagamento:</label>
+            <input
+              type="text"
+              id="editExpensePay"
+              name="editExpensePay"
+              required
+            />
+
+            <button
+              type="button"
+              class="btn btn-submit"
+              onclick="editarDespesa()"
+            >
+              Salvar Alterações
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Modal para Despesa -->
+      <div id="expenseModal" class="modal">
+        <div class="modal-content">
+          <span class="close" id="closeExpenseModal">&times;</span>
+          <h2>Cadastrar Despesa</h2>
+          <form id="formDespesa">
+            <label for="expenseDescription">Descrição:</label>
+            <input
+              type="text"
+              id="expenseDescription"
+              name="expenseDescription"
+              required
+            />
+
+            <label for="expenseValue">Valor:</label>
+            <input type="text" id="expenseValue" name="expenseValue" required />
+
+            <label for="expenseDate">Data:</label>
+            <input type="date" id="expenseDate" name="expenseDate" required />
+
+            <label for="expenseCategory">Categoria:</label>
+            <select
+              name="expenseCategory"
+              id="expenseCategory"
+              required
+            ></select>
+
+            <label for="expenseStatus">Status:</label>
+            <input
+              type="text"
+              id="expenseStatus"
+              name="expenseStatus"
+              required
+            />
+
+            <label for="expensePay">Forma de Pagamento:</label>
+            <input type="text" id="expensePay" name="expensePay" required />
+
+            <button type="button" class="btn btn-submit" onclick="addDespesa()">
+              Salvar
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+    <script src="cat.js"></script>
+    <script src="utilities.js"></script>
+  </body>
+</html>

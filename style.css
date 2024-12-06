@@ -1,0 +1,212 @@
+/* Reset e estilo geral */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif; /* Fonte mais moderna */
+}
+
+body {
+  min-height: 100vh; /* Altura mínima da página */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1a1a1a, #333); /* Fundo com degradê */
+  margin: 0;
+  color: white;
+  padding: 20px; /* Espaço para evitar que o conteúdo encoste nos extremos */
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  background: linear-gradient(135deg, #1e1e1e, #292929); /* Degradê no container */
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); /* Sombra mais suave */
+  padding: 30px;
+  margin: auto;
+  overflow: hidden; /* Garante que elementos não "escapem" */
+}
+
+/* Cabeçalho */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+header h1 {
+  color: #76c7c0; /* Cor verde-água moderna */
+  font-size: 2.8rem;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Seções e tabelas */
+.table-section {
+  margin-bottom: 30px;
+}
+h2 {
+  margin-bottom: 10px;
+  color: #e0e0e0;
+  font-size: 1.5rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: #202020;
+  border-radius: 8px;
+  overflow: hidden; /* Aplica o arredondamento */
+}
+thead {
+  background: linear-gradient(135deg, #444, #555);
+}
+thead th {
+  color: #ffffff;
+  padding: 12px;
+  text-align: left;
+  font-size: 1rem;
+}
+tbody tr {
+  border-bottom: 1px solid #333;
+}
+tbody td {
+  padding: 12px;
+  font-size: 0.95rem;
+  color: #d0d0d0;
+}
+tbody tr:nth-child(even) {
+  background-color: #292929;
+}
+tbody tr:hover {
+  background-color: #383838; /* Realce ao passar o mouse */
+  transition: background-color 0.3s ease;
+}
+
+/* Botões */
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+.btn-add {
+  background-color: #4caf50; /* Verde */
+  font-weight: bold;
+  color: #f5f5f5;
+}
+.btn-add:hover {
+  background-color: #45a049; /* Verde escuro */
+  transform: translateY(-2px); /* Leve animação */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #2a2a2a;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 500px;
+  animation: fadeIn 0.3s ease-out;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #f3f3f3;
+  transition: color 0.2s ease;
+}
+.close:hover {
+  color: #ff5252; /* Realce ao passar o mouse */
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input,
+textarea,
+select,
+button {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+.btn-submit {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-submit:hover {
+  background-color: #45a049;
+  transform: translateY(-2px); /* Animação sutil */
+}
+
+.buttonAcoes {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 6px; /* Espaçamento entre os botões */
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+
+/* Estilo do botão "Editar" */
+.edit-button {
+  background-color: #76c7c0; /* Verde-água */
+}
+
+.edit-button:hover {
+  background-color: #5aa9a3;
+}
+
+/* Estilo do botão "Excluir" */
+.delete-button {
+  background-color: #f44336; /* Vermelho */
+}
+
+.delete-button:hover {
+  background-color: #d32f2f;
+}
+
+/* Animação de fade-in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
